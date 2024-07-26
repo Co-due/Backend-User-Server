@@ -1,5 +1,6 @@
 package soma.haeya.edupi_user.signup;
 
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +15,7 @@ import soma.haeya.edupi_user.signup.dto.SignUpDTO;
 public class SignUpController {
 
     @RequestMapping(value = "signup", method = RequestMethod.POST)
-    public String createPost(@RequestBody SignUpDTO signUpDTO) {
+    public String createPost(@Valid @RequestBody SignUpDTO signUpDTO) {
         ModelAndView mav = new ModelAndView();
 
         log.info("[SignUpDTO] {}", signUpDTO);
