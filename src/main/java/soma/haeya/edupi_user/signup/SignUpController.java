@@ -19,20 +19,18 @@ public class SignUpController {
 
     @RequestMapping(value = "signup", method = RequestMethod.POST)
     public ResponseEntity<Void> createPost(@Valid @RequestBody SignUpDTO signUpDTO) {
-        ModelAndView mav = new ModelAndView();
-
         log.info("[SignUpDTO] {}", signUpDTO);
 
         // DB에 저장하기
         RestClient restClient = RestClient.create();
 
-        ResponseEntity<Void> bodilessEntity = restClient.post()
-                .uri("http://localhost:8081/save/signup")
+        ResponseEntity<Void> response = restClient.post()
+                .uri("http://localhost:8081/api/v1/save/signup")
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(signUpDTO)
                 .retrieve()
                 .toBodilessEntity();
 
-        return bodilessEntity;
+        return ResponseEntity.status(response.getStatusCode()).build();
     }
 }
