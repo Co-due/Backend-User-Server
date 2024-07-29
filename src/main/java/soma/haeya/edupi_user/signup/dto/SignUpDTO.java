@@ -9,7 +9,6 @@ import lombok.*;
 @Getter
 @ToString
 @Builder
-@NoArgsConstructor (access = AccessLevel.PROTECTED)
 @AllArgsConstructor (access = AccessLevel.PROTECTED)
 public class SignUpDTO
 {
