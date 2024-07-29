@@ -1,36 +1,38 @@
 package soma.haeya.edupi_user.signup;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestClient;
-import org.springframework.web.servlet.ModelAndView;
+import soma.haeya.edupi_user.signup.dto.ErrorResponse;
 import soma.haeya.edupi_user.signup.dto.SignUpDTO;
+import soma.haeya.edupi_user.signup.exception.DbValidException;
+
 
 @Slf4j
 @RestController
 @RequestMapping("/user/*")
 public class SignUpController {
 
-    @RequestMapping(value = "signup", method = RequestMethod.POST)
+    @PostMapping(value = "signup")
     public ResponseEntity<Void> createPost(@Valid @RequestBody SignUpDTO signUpDTO) {
-        log.info("[SignUpDTO] {}", signUpDTO);
-
         // DB에 저장하기
         RestClient restClient = RestClient.create();
 
-        ResponseEntity<Void> response = restClient.post()
-                .uri("http://localhost:8081/api/v1/save/signup")
+        return restClient.post()
+                .uri("http://localhost:8081/api/v1/user/save/signup")
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(signUpDTO)
                 .retrieve()
+                .onStatus(HttpStatusCode::is4xxClientError, (req, res) -> {
+                    ErrorResponse errorResponse =  new ObjectMapper().readValue (res.getBody(), ErrorResponse.class);
+                    throw new DbValidException(errorResponse.message(), HttpStatus.BAD_REQUEST.value());
+                })
                 .toBodilessEntity();
-
-        return ResponseEntity.status(response.getStatusCode()).build();
     }
 }

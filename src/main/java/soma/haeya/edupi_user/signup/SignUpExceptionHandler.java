@@ -8,6 +8,9 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import soma.haeya.edupi_user.signup.dto.ErrorResponse;
+import soma.haeya.edupi_user.signup.exception.DbValidException;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,5 +30,13 @@ public class SignUpExceptionHandler {
         });
 
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(DbValidException.class)    // DB 저장 실패에 대한 에러
+    public ResponseEntity<ErrorResponse> handleValidationExceptions(DbValidException ex) {
+        ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(), HttpStatus.BAD_REQUEST);
+
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 }
