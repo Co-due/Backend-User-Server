@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestClient;
 import soma.haeya.edupi_user.signup.dto.ErrorResponse;
-import soma.haeya.edupi_user.signup.dto.SignUpDTO;
+import soma.haeya.edupi_user.signup.dto.SignupRequest;
 import soma.haeya.edupi_user.signup.exception.DbValidException;
 
 
@@ -20,14 +20,14 @@ import soma.haeya.edupi_user.signup.exception.DbValidException;
 public class SignUpController {
 
     @PostMapping(value = "signup")
-    public ResponseEntity<Void> createPost(@Valid @RequestBody SignUpDTO signUpDTO) {
+    public ResponseEntity<Void> createPost(@Valid @RequestBody SignupRequest signupRequest) {
         // DB에 저장하기
         RestClient restClient = RestClient.create();
 
         return restClient.post()
                 .uri("http://localhost:8081/api/v1/user/save/signup")
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(signUpDTO)
+                .body(signupRequest)
                 .retrieve()
                 .onStatus(HttpStatusCode::is4xxClientError, (req, res) -> {
                     ErrorResponse errorResponse =  new ObjectMapper().readValue (res.getBody(), ErrorResponse.class);

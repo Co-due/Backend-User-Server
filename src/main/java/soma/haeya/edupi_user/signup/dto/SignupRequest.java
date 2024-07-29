@@ -10,7 +10,7 @@ import lombok.*;
 @ToString
 @Builder
 @AllArgsConstructor (access = AccessLevel.PROTECTED)
-public class SignUpDTO
+public class SignupRequest
 {
     @NotBlank(message = "이메일은 공백이 아니어야 합니다.")
     @Email(message = "잘못된 이메일 형식입니다.")

@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Set;
 
 
-class SignUpDTOTest {
+class SignupRequestTest {
 
     private static ValidatorFactory factory;
     private static Validator validator;
@@ -24,14 +24,14 @@ class SignUpDTOTest {
 
     @Test
     void 정상_회원가입_형식(){
-        SignUpDTO signUpDTO = SignUpDTO.builder()
+        SignupRequest signupRequest = SignupRequest.builder()
                 .email("rladbwls0000@gmail.com")
                 .name("yujin")
                 .password("rladbwls000@")
                 .phoneNumber("010-1234-5678")
                 .build();
 
-        Set<ConstraintViolation<SignUpDTO>> exceptions = validator.validate(signUpDTO);
+        Set<ConstraintViolation<SignupRequest>> exceptions = validator.validate(signupRequest);
 
         Assertions.assertEquals(exceptions.size(), 0);
     }
@@ -39,16 +39,16 @@ class SignUpDTOTest {
 
     @Test
     void 실패_잘못된_이메일_형식(){
-        SignUpDTO signUpDTO = SignUpDTO.builder()
+        SignupRequest signupRequest = SignupRequest.builder()
                 .email("rladbwls0000")
                 .name("yujin")
                 .password("rladbwls000@")
                 .build();
 
-        Set<ConstraintViolation<SignUpDTO>> exceptions = validator.validate(signUpDTO);
+        Set<ConstraintViolation<SignupRequest>> exceptions = validator.validate(signupRequest);
 
         Assertions.assertFalse(exceptions.isEmpty());
-        ConstraintViolation<SignUpDTO> violation = exceptions.iterator().next();
+        ConstraintViolation<SignupRequest> violation = exceptions.iterator().next();
         Assertions.assertEquals("잘못된 이메일 형식입니다.", violation.getMessage());
         Assertions.assertEquals("email", violation.getPropertyPath().toString());
 
@@ -56,26 +56,26 @@ class SignUpDTOTest {
 
     @Test
     void 실패_회원가입_요청_빈값() {
-        SignUpDTO signUpDTO = SignUpDTO.builder()
+        SignupRequest signupRequest = SignupRequest.builder()
                 .email("")
                 .name("")
                 .password("")
                 .build();
 
-        Set<ConstraintViolation<SignUpDTO>> exceptions = validator.validate(signUpDTO);
+        Set<ConstraintViolation<SignupRequest>> exceptions = validator.validate(signupRequest);
 
         Assertions.assertFalse(exceptions.isEmpty());
 
     }
         @Test
         void 실패_회원가입_요청_잘못된_비민번호(){
-            SignUpDTO signUpDTO = SignUpDTO.builder()
+            SignupRequest signupRequest = SignupRequest.builder()
                     .email("")
                     .name("")
                     .password("12345")
                     .build();
 
-            Set<ConstraintViolation<SignUpDTO>> exceptions = validator.validate(signUpDTO);
+            Set<ConstraintViolation<SignupRequest>> exceptions = validator.validate(signupRequest);
 
             Assertions.assertFalse(exceptions.isEmpty());
     }
