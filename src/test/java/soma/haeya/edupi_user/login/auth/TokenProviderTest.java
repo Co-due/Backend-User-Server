@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import soma.haeya.edupi_user.login.domain.Member;
-import soma.haeya.edupi_user.login.domain.Role;
 import soma.haeya.edupi_user.login.dto.TokenInfo;
 
 @SpringBootTest
@@ -20,7 +19,7 @@ public class TokenProviderTest {
 
     @BeforeEach
     void init() {
-        member = new Member("asdf@naver.com", "홍길동", Role.ROLE_USER);
+        member = new Member(1L, "asdf@naver.com", "asdf1234", "홍길동", "ROLE_USER");
     }
 
     @Test

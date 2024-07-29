@@ -16,7 +16,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import soma.haeya.edupi_user.login.client.config.MemberApiRestClientConfig;
 import soma.haeya.edupi_user.login.domain.Member;
-import soma.haeya.edupi_user.login.domain.Role;
 import soma.haeya.edupi_user.login.dto.MemberLoginRequest;
 
 @SpringBootTest
@@ -50,7 +49,7 @@ class MemberApiClientTest {
     @Test
     @DisplayName("이메일과 비밀번호로 회원을 찾는 Http 요청 테스트")
     void testFindMemberByEmailAndPassword() throws JsonProcessingException {
-        Member expectedResponse = new Member(1L, "asdf@naver.com", "", "홍길동", Role.ROLE_USER);
+        Member expectedResponse = new Member(1L, "asdf@naver.com", "", "홍길동", "ROLE_USER");
 
         // mockWebServer 응답 설정
         mockWebServer.enqueue(new MockResponse()

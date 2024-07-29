@@ -1,31 +1,27 @@
 package soma.haeya.edupi_user.login.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @Getter
-@NoArgsConstructor
+@RequiredArgsConstructor
 public class Member {
 
-    private Long id;
-    private String password;
-    private String email;
-    private String name;
-    private Role role;
+    private final Long id;
+    private final String password;
+    private final String email;
+    private final String name;
+    private final Role role;
 
-    public Member(Long id, String email, String password, String name, Role role) {
+    @JsonCreator
+    public Member(Long id, String email, String password, String name, String role
+    ) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.name = name;
-        this.role = role;
+        this.role = Role.valueOf(role);
     }
-
-    public Member(String email, String name, Role role) {
-        this.email = email;
-        this.name = name;
-        this.role = role;
-    }
-
 }
