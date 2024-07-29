@@ -17,13 +17,13 @@ public class MemberService {
     private final MemberApiClient memberApiClient;
     private final TokenProvider tokenProvider;
 
-    public String memberLogin(MemberLoginRequest memberLoginRequest) {
+    public String login(MemberLoginRequest memberLoginRequest) {
         Member findMember = memberApiClient.findMemberByEmailAndPassword(memberLoginRequest);
 
         return tokenProvider.generateToken(findMember);
     }
 
-    public TokenInfo findUserInfo(String token) {
+    public TokenInfo findMemberInfo(String token) {
         return tokenProvider.findUserInfoBy(token);
     }
 

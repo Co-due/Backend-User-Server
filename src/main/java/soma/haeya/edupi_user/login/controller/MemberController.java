@@ -25,7 +25,7 @@ public class MemberController {
     @PostMapping("/login")
     public ResponseEntity<Void> login(@Valid @RequestBody MemberLoginRequest memberLoginRequest,
         HttpServletResponse response) {
-        String token = memberService.memberLogin(memberLoginRequest);
+        String token = memberService.login(memberLoginRequest);
 
         Cookie cookie = new Cookie("token", token);
         cookie.setPath("/");
@@ -38,7 +38,7 @@ public class MemberController {
 
     @GetMapping("/login/info")
     public ResponseEntity<TokenInfo> loginInfo(@CookieValue("token") String token) {
-        TokenInfo tokenInfo = memberService.findUserInfo(token);
+        TokenInfo tokenInfo = memberService.findMemberInfo(token);
 
         return ResponseEntity.ok(tokenInfo);
     }

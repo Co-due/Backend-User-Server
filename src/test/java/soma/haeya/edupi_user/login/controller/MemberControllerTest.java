@@ -36,7 +36,7 @@ class MemberControllerTest {
             .password("asdf1234")
             .build();
 
-        doReturn("token").when(memberService).memberLogin(memberLoginRequest);
+        doReturn("token").when(memberService).login(memberLoginRequest);
 
         mockMvc.perform(post("/member/login")
                 .content(objectMapper.writeValueAsString(memberLoginRequest))

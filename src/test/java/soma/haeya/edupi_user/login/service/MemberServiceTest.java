@@ -50,7 +50,7 @@ public class MemberServiceTest {
             expectedMember);
         when(tokenProvider.generateToken(expectedMember)).thenReturn(expectedToken);
 
-        String resultToken = memberService.memberLogin(memberLoginRequest);
+        String resultToken = memberService.login(memberLoginRequest);
 
         Assertions.assertThat(resultToken).isEqualTo(expectedToken);
     }
@@ -63,7 +63,7 @@ public class MemberServiceTest {
             new IllegalArgumentException("아이디 비밀번호가 일치하지 않습니다.")
         );
 
-        Assertions.assertThatThrownBy(() -> memberService.memberLogin(memberLoginRequest))
+        Assertions.assertThatThrownBy(() -> memberService.login(memberLoginRequest))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("아이디 비밀번호가 일치하지 않습니다.");
     }
