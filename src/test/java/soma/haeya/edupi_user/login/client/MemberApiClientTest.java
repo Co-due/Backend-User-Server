@@ -60,7 +60,7 @@ class MemberApiClientTest {
             .email("asdf@naver.com")
             .password("password").build();
 
-        Member result = memberApiClient.findMemberByEmailAndPassword(request);
+        Member result = memberApiClient.retrieveMemberByEmailAndPassword(request);
 
         assertEquals(result.getEmail(), expectedResponse.getEmail());
         assertEquals(result.getName(), expectedResponse.getName());

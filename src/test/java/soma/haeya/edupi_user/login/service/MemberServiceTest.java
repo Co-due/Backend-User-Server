@@ -46,7 +46,7 @@ public class MemberServiceTest {
 
         String expectedToken = "token";
 
-        when(memberRepository.findMemberByEmailAndPassword(memberLoginRequest)).thenReturn(
+        when(memberRepository.retrieveMemberByEmailAndPassword(memberLoginRequest)).thenReturn(
             expectedMember);
         when(tokenProvider.generateToken(expectedMember)).thenReturn(expectedToken);
 
@@ -59,7 +59,7 @@ public class MemberServiceTest {
     @DisplayName("아이디 패스워드에 맞는 멤버가 없으면 예외를 반환한다.")
     void memberLoginException() {
 
-        when(memberRepository.findMemberByEmailAndPassword(memberLoginRequest)).thenThrow(
+        when(memberRepository.retrieveMemberByEmailAndPassword(memberLoginRequest)).thenThrow(
             new IllegalArgumentException("아이디 비밀번호가 일치하지 않습니다.")
         );
 

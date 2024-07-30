@@ -18,7 +18,7 @@ public class MemberService {
     private final TokenProvider tokenProvider;
 
     public String login(MemberLoginRequest memberLoginRequest) {
-        Member findMember = memberApiClient.findMemberByEmailAndPassword(memberLoginRequest);
+        Member findMember = memberApiClient.retrieveMemberByEmailAndPassword(memberLoginRequest);
 
         return tokenProvider.generateToken(findMember);
     }
