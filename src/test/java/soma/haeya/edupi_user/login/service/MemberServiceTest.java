@@ -13,6 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import soma.haeya.edupi_user.login.auth.TokenProvider;
 import soma.haeya.edupi_user.login.client.MemberApiClient;
 import soma.haeya.edupi_user.login.domain.Member;
+import soma.haeya.edupi_user.login.domain.Role;
 import soma.haeya.edupi_user.login.dto.MemberLoginRequest;
 
 @ExtendWith(MockitoExtension.class)
@@ -42,7 +43,7 @@ public class MemberServiceTest {
     @DisplayName("아이디와 패스워드에 맞는 멤버가 있으면 token을 반환한다.")
     void memberLogin() {
 
-        Member expectedMember = new Member(1L, "asdf@naver.com", "asdf1234", "홍길동", "ROLE_USER");
+        Member expectedMember = new Member("asdf@naver.com", "홍길동", Role.ROLE_USER);
 
         String expectedToken = "token";
 
