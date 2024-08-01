@@ -7,6 +7,7 @@ import jakarta.validation.ValidatorFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import soma.haeya.edupi_user.signup.dto.request.SignupRequest;
 
 import java.util.Set;
 

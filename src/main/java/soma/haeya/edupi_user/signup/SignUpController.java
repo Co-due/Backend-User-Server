@@ -9,8 +9,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestClient;
-import soma.haeya.edupi_user.signup.dto.ErrorResponse;
-import soma.haeya.edupi_user.signup.dto.SignupRequest;
+import soma.haeya.edupi_user.signup.dto.response.ErrorResponse;
+import soma.haeya.edupi_user.signup.dto.request.SignupRequest;
 import soma.haeya.edupi_user.signup.exception.DbValidException;
 
 
