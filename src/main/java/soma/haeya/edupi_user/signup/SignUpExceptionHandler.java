@@ -29,14 +29,16 @@ public class SignUpExceptionHandler {
             errors.put(fieldName, errorMessage);
         });
 
-        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+        return ResponseEntity.badRequest()
+                .body(errors);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(DbValidException.class)    // DB 저장 실패에 대한 에러
     public ResponseEntity<ErrorResponse> handleValidationExceptions(DbValidException ex) {
-        ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        ErrorResponse errors = new ErrorResponse(ex.getMessage(), HttpStatus.BAD_REQUEST);
 
-        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+        return ResponseEntity.badRequest()
+                .body(errors);
     }
 }
