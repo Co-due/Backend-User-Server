@@ -10,11 +10,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import soma.haeya.edupi_user.login.auth.TokenProvider;
-import soma.haeya.edupi_user.login.client.MemberApiClient;
-import soma.haeya.edupi_user.login.domain.Member;
-import soma.haeya.edupi_user.login.domain.Role;
-import soma.haeya.edupi_user.login.dto.MemberLoginRequest;
+import soma.haeya.edupi_user.auth.TokenProvider;
+import soma.haeya.edupi_user.client.MemberApiClient;
+import soma.haeya.edupi_user.domain.Member;
+import soma.haeya.edupi_user.domain.Role;
+import soma.haeya.edupi_user.dto.request.MemberLoginRequest;
+import soma.haeya.edupi_user.service.MemberService;
 
 @ExtendWith(MockitoExtension.class)
 public class MemberServiceTest {

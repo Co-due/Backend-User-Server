@@ -1,4 +1,4 @@
-package soma.haeya.edupi_user.signup;
+package soma.haeya.edupi_user.exception;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -8,8 +8,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import soma.haeya.edupi_user.signup.dto.response.ErrorResponse;
-import soma.haeya.edupi_user.signup.exception.DbValidException;
+import soma.haeya.edupi_user.dto.response.ErrorResponse;
 
 import java.util.HashMap;
 import java.util.Map;

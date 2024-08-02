@@ -1,4 +1,4 @@
-package soma.haeya.edupi_user.login.auth;
+package soma.haeya.edupi_user.auth;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -11,9 +11,9 @@ import java.util.Date;
 import javax.crypto.SecretKey;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import soma.haeya.edupi_user.login.domain.Member;
-import soma.haeya.edupi_user.login.domain.Role;
-import soma.haeya.edupi_user.login.dto.TokenInfo;
+import soma.haeya.edupi_user.domain.Member;
+import soma.haeya.edupi_user.domain.Role;
+import soma.haeya.edupi_user.dto.TokenInfo;
 
 @Component
 public class TokenProvider {

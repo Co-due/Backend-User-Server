@@ -1,4 +1,0 @@
-package soma.haeya.edupi_user.signup.dto.response;
-
-public record ErrorResponse(String message) {
-}

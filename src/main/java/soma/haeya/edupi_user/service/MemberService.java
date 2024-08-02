@@ -1,13 +1,13 @@
-package soma.haeya.edupi_user.login.service;
+package soma.haeya.edupi_user.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import soma.haeya.edupi_user.login.auth.TokenProvider;
-import soma.haeya.edupi_user.login.client.MemberApiClient;
-import soma.haeya.edupi_user.login.domain.Member;
-import soma.haeya.edupi_user.login.dto.MemberLoginRequest;
-import soma.haeya.edupi_user.login.dto.TokenInfo;
+import soma.haeya.edupi_user.auth.TokenProvider;
+import soma.haeya.edupi_user.client.MemberApiClient;
+import soma.haeya.edupi_user.domain.Member;
+import soma.haeya.edupi_user.dto.request.MemberLoginRequest;
+import soma.haeya.edupi_user.dto.TokenInfo;
 
 @Service
 @Slf4j

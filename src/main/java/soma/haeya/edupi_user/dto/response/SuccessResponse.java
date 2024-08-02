@@ -1,4 +1,4 @@
-package soma.haeya.edupi_user.signup.dto.response;
+package soma.haeya.edupi_user.dto.response;
 
 public record SuccessResponse(String message) {
 }

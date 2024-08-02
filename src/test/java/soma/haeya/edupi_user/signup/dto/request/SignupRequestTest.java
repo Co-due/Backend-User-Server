@@ -1,4 +1,4 @@
-package soma.haeya.edupi_user.signup.dto;
+package soma.haeya.edupi_user.signup.dto.request;
 
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
@@ -7,7 +7,7 @@ import jakarta.validation.ValidatorFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import soma.haeya.edupi_user.signup.dto.request.SignupRequest;
+import soma.haeya.edupi_user.dto.request.SignupRequest;
 
 import java.util.Set;
 

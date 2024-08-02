@@ -14,10 +14,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
-import soma.haeya.edupi_user.login.client.config.MemberApiRestClientConfig;
-import soma.haeya.edupi_user.login.domain.Member;
-import soma.haeya.edupi_user.login.domain.Role;
-import soma.haeya.edupi_user.login.dto.MemberLoginRequest;
+import soma.haeya.edupi_user.client.MemberApiClient;
+import soma.haeya.edupi_user.client.config.MemberApiRestClientConfig;
+import soma.haeya.edupi_user.domain.Member;
+import soma.haeya.edupi_user.domain.Role;
+import soma.haeya.edupi_user.dto.request.MemberLoginRequest;
 
 @SpringBootTest
 @Import(MemberApiRestClientConfig.class)

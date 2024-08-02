@@ -13,8 +13,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import soma.haeya.edupi_user.login.dto.MemberLoginRequest;
-import soma.haeya.edupi_user.login.service.MemberService;
+import soma.haeya.edupi_user.controller.MemberController;
+import soma.haeya.edupi_user.dto.request.MemberLoginRequest;
+import soma.haeya.edupi_user.service.MemberService;
 
 @WebMvcTest(MemberController.class)
 class MemberControllerTest {

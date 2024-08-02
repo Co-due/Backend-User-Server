@@ -1,4 +1,4 @@
-package soma.haeya.edupi_user.login.domain;
+package soma.haeya.edupi_user.domain;
 
 
 import lombok.Getter;
