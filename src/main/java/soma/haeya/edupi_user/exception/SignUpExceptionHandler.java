@@ -1,5 +1,7 @@
 package soma.haeya.edupi_user.exception;
 
+import java.util.HashMap;
+import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,36 +10,34 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import soma.haeya.edupi_user.dto.response.ErrorResponse;
-
-import java.util.HashMap;
-import java.util.Map;
+import soma.haeya.edupi_user.dto.response.Response;
 
 @Slf4j
 @ControllerAdvice
 public class SignUpExceptionHandler {
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)    // @Valid 실패에 대한 에러
-    public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
 
-        // 오류 목록을 반복
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName, errorMessage);
-        });
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  @ExceptionHandler(MethodArgumentNotValidException.class)    // @Valid 실패에 대한 에러
+  public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
+    Map<String, String> errors = new HashMap<>();
 
-        return ResponseEntity.badRequest()
-                .body(errors);
-    }
+    // 오류 목록을 반복
+    ex.getBindingResult().getAllErrors().forEach((error) -> {
+      String fieldName = ((FieldError) error).getField();
+      String errorMessage = error.getDefaultMessage();
+      errors.put(fieldName, errorMessage);
+    });
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(DbValidException.class)    // DB 저장 실패에 대한 에러
-    public ResponseEntity<ErrorResponse> handleValidationExceptions(DbValidException ex) {
-        ErrorResponse errors = new ErrorResponse(ex.getMessage());
+    return ResponseEntity.badRequest()
+        .body(errors);
+  }
 
-        return ResponseEntity.badRequest()
-                .body(errors);
-    }
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  @ExceptionHandler(DbValidException.class)    // DB 저장 실패에 대한 에러
+  public ResponseEntity<Response> handleValidationExceptions(DbValidException ex) {
+    Response errors = new Response(ex.getMessage());
+
+    return ResponseEntity.badRequest()
+        .body(errors);
+  }
 }
