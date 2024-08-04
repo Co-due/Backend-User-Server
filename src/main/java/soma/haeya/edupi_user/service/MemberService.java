@@ -26,7 +26,7 @@ public class MemberService {
   private final ObjectMapper objectMapper;
 
   public String login(MemberLoginRequest memberLoginRequest) {
-    Member findMember = memberApiClient.retrieveMemberByEmailAndPassword(memberLoginRequest);
+    Member findMember = memberApiClient.findMemberByEmailAndPassword(memberLoginRequest);
 
     return tokenProvider.generateToken(findMember);
   }
@@ -44,8 +44,8 @@ public class MemberService {
         throw new DbValidException(response.message());
       }
     }
-    return ResponseEntity.internalServerError()
-        .body(new Response("unexpected error"));
+    // 예외가 발생하지 않는 경우 리턴문을 제거하기 위해 기본 예외 던지기
+    throw new IllegalStateException("Unexpected error occurred");
   }
 
   public TokenInfo findMemberInfo(String token) {
