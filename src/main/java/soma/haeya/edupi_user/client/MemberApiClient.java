@@ -15,7 +15,7 @@ import soma.haeya.edupi_user.dto.response.Response;
 public interface MemberApiClient {
 
   @PostExchange("/login")
-  Member retrieveMemberByEmailAndPassword(@RequestBody MemberLoginRequest memberLoginRequest);
+  Member findMemberByEmailAndPassword(@RequestBody MemberLoginRequest memberLoginRequest);
 
   @PostExchange("/signup")
   ResponseEntity<Response> saveMember(@RequestBody SignupRequest signupRequest);
