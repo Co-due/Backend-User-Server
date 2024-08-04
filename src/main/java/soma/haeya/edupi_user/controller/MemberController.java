@@ -49,7 +49,6 @@ public class MemberController {
   @PostMapping(value = "/signup")
   public ResponseEntity<Response> createPost(@Valid @RequestBody SignupRequest signupRequest)
       throws JsonProcessingException {
-    // DB에 저장하기
     return memberService.signUp(signupRequest);
   }
 }

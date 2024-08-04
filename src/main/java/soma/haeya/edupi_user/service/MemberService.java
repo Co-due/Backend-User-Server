@@ -15,6 +15,7 @@ import soma.haeya.edupi_user.dto.request.MemberLoginRequest;
 import soma.haeya.edupi_user.dto.request.SignupRequest;
 import soma.haeya.edupi_user.dto.response.Response;
 import soma.haeya.edupi_user.exception.DbValidException;
+import soma.haeya.edupi_user.exception.UnexpectedServerException;
 
 @Service
 @Slf4j
@@ -40,12 +41,11 @@ public class MemberService {
       if (e.getStatusCode().is4xxClientError()) {
         throw new DbValidException(response.message());
       } else if (e.getStatusCode().is5xxServerError()) {
-        // TODO: 후에 정의할 에러 핸들링 로직 추가
+        // TODO: 클라이언트에게 보낼 에러 핸들링 로직 추가
         throw new DbValidException(response.message());
       }
     }
-    // 예외가 발생하지 않는 경우 리턴문을 제거하기 위해 기본 예외 던지기
-    throw new IllegalStateException("Unexpected error occurred");
+    throw new UnexpectedServerException("회원가입 요청 중 Unexpected error 발생");
   }
 
   public TokenInfo findMemberInfo(String token) {
