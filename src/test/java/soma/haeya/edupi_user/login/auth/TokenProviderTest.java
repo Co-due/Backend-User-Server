@@ -6,9 +6,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import soma.haeya.edupi_user.login.domain.Member;
-import soma.haeya.edupi_user.login.domain.Role;
-import soma.haeya.edupi_user.login.dto.TokenInfo;
+import soma.haeya.edupi_user.auth.TokenProvider;
+import soma.haeya.edupi_user.domain.Member;
+import soma.haeya.edupi_user.domain.Role;
+import soma.haeya.edupi_user.dto.TokenInfo;
 
 @SpringBootTest
 public class TokenProviderTest {

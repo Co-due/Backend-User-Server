@@ -1,9 +1,9 @@
-package soma.haeya.edupi_user.login.dto;
+package soma.haeya.edupi_user.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import soma.haeya.edupi_user.login.domain.Role;
+import soma.haeya.edupi_user.domain.Role;
 
 @Data
 @Builder

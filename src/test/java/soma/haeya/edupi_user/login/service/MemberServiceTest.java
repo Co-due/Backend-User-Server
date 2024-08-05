@@ -10,63 +10,64 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import soma.haeya.edupi_user.login.auth.TokenProvider;
-import soma.haeya.edupi_user.login.client.MemberApiClient;
-import soma.haeya.edupi_user.login.domain.Member;
-import soma.haeya.edupi_user.login.domain.Role;
-import soma.haeya.edupi_user.login.dto.MemberLoginRequest;
+import soma.haeya.edupi_user.auth.TokenProvider;
+import soma.haeya.edupi_user.client.MemberApiClient;
+import soma.haeya.edupi_user.domain.Member;
+import soma.haeya.edupi_user.domain.Role;
+import soma.haeya.edupi_user.dto.request.MemberLoginRequest;
+import soma.haeya.edupi_user.service.MemberService;
 
 @ExtendWith(MockitoExtension.class)
 public class MemberServiceTest {
 
-    @InjectMocks
-    private MemberService memberService;
+  @InjectMocks
+  private MemberService memberService;
 
-    @Mock
-    private MemberApiClient memberRepository;
+  @Mock
+  private MemberApiClient memberRepository;
 
-    @Mock
-    private TokenProvider tokenProvider;
+  @Mock
+  private TokenProvider tokenProvider;
 
-    private MemberLoginRequest memberLoginRequest;
+  private MemberLoginRequest memberLoginRequest;
 
-    @BeforeEach
-    void init() {
-        memberLoginRequest = MemberLoginRequest.builder()
-            .email("asdf@naver.com")
-            .password("asdf1234")
-            .build();
-    }
+  @BeforeEach
+  void init() {
+    memberLoginRequest = MemberLoginRequest.builder()
+        .email("asdf@naver.com")
+        .password("asdf1234")
+        .build();
+  }
 
 
-    @Test
-    @DisplayName("아이디와 패스워드에 맞는 멤버가 있으면 token을 반환한다.")
-    void memberLogin() {
+  @Test
+  @DisplayName("아이디와 패스워드에 맞는 멤버가 있으면 token을 반환한다.")
+  void memberLogin() {
 
-        Member expectedMember = new Member("asdf@naver.com", "홍길동", Role.ROLE_USER);
+    Member expectedMember = new Member("asdf@naver.com", "홍길동", Role.ROLE_USER);
 
-        String expectedToken = "token";
+    String expectedToken = "token";
 
-        when(memberRepository.retrieveMemberByEmailAndPassword(memberLoginRequest)).thenReturn(
-            expectedMember);
-        when(tokenProvider.generateToken(expectedMember)).thenReturn(expectedToken);
+    when(memberRepository.findMemberByEmailAndPassword(memberLoginRequest)).thenReturn(
+        expectedMember);
+    when(tokenProvider.generateToken(expectedMember)).thenReturn(expectedToken);
 
-        String resultToken = memberService.login(memberLoginRequest);
+    String resultToken = memberService.login(memberLoginRequest);
 
-        Assertions.assertThat(resultToken).isEqualTo(expectedToken);
-    }
+    Assertions.assertThat(resultToken).isEqualTo(expectedToken);
+  }
 
-    @Test
-    @DisplayName("아이디 패스워드에 맞는 멤버가 없으면 예외를 반환한다.")
-    void memberLoginException() {
+  @Test
+  @DisplayName("아이디 패스워드에 맞는 멤버가 없으면 예외를 반환한다.")
+  void memberLoginException() {
 
-        when(memberRepository.retrieveMemberByEmailAndPassword(memberLoginRequest)).thenThrow(
-            new IllegalArgumentException("아이디 비밀번호가 일치하지 않습니다.")
-        );
+    when(memberRepository.findMemberByEmailAndPassword(memberLoginRequest)).thenThrow(
+        new IllegalArgumentException("아이디 비밀번호가 일치하지 않습니다.")
+    );
 
-        Assertions.assertThatThrownBy(() -> memberService.login(memberLoginRequest))
-            .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("아이디 비밀번호가 일치하지 않습니다.");
-    }
+    Assertions.assertThatThrownBy(() -> memberService.login(memberLoginRequest))
+        .isInstanceOf(IllegalArgumentException.class)
+        .hasMessage("아이디 비밀번호가 일치하지 않습니다.");
+  }
 
 }

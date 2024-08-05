@@ -1,4 +1,4 @@
-package soma.haeya.edupi_user.signup.dto.request;
+package soma.haeya.edupi_user.dto.request;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
