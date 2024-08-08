@@ -23,32 +23,37 @@ import soma.haeya.edupi_user.service.MemberService;
 @RequestMapping("/member")
 public class MemberController {
 
-  private final MemberService memberService;
+    private final MemberService memberService;
 
-  @PostMapping("/login")
-  public ResponseEntity<Void> login(@Valid @RequestBody MemberLoginRequest memberLoginRequest,
-      HttpServletResponse response) {
-    String token = memberService.login(memberLoginRequest);
+    @GetMapping("/")
+    public String hello() {
+        return "hello";
+    }
 
-    Cookie cookie = new Cookie("token", token);
-    cookie.setPath("/");
-    cookie.setHttpOnly(true);
+    @PostMapping("/login")
+    public ResponseEntity<Void> login(@Valid @RequestBody MemberLoginRequest memberLoginRequest,
+        HttpServletResponse response) {
+        String token = memberService.login(memberLoginRequest);
 
-    response.addCookie(cookie);
+        Cookie cookie = new Cookie("token", token);
+        cookie.setPath("/");
+        cookie.setHttpOnly(true);
 
-    return ResponseEntity.ok().build();
-  }
+        response.addCookie(cookie);
 
-  @GetMapping("/login/info")
-  public ResponseEntity<TokenInfo> loginInfo(@CookieValue("token") String token) {
-    TokenInfo tokenInfo = memberService.findMemberInfo(token);
+        return ResponseEntity.ok().build();
+    }
 
-    return ResponseEntity.ok(tokenInfo);
-  }
+    @GetMapping("/login/info")
+    public ResponseEntity<TokenInfo> loginInfo(@CookieValue("token") String token) {
+        TokenInfo tokenInfo = memberService.findMemberInfo(token);
 
-  @PostMapping(value = "/signup")
-  public ResponseEntity<Response> createPost(@Valid @RequestBody SignupRequest signupRequest)
-      throws JsonProcessingException {
-    return memberService.signUp(signupRequest);
-  }
+        return ResponseEntity.ok(tokenInfo);
+    }
+
+    @PostMapping(value = "/signup")
+    public ResponseEntity<Response> createPost(@Valid @RequestBody SignupRequest signupRequest)
+        throws JsonProcessingException {
+        return memberService.signUp(signupRequest);
+    }
 }

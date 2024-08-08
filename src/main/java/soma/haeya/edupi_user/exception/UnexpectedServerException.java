@@ -5,11 +5,11 @@ package soma.haeya.edupi_user.exception;
  */
 public class UnexpectedServerException extends RuntimeException {
 
-  public UnexpectedServerException(String message) {
-    super(message);
-  }
+    public UnexpectedServerException(String message) {
+        super(message);
+    }
 
-  public UnexpectedServerException(String message, Throwable cause) {
-    super(message, cause);
-  }
+    public UnexpectedServerException(String message, Throwable cause) {
+        super(message, cause);
+    }
 }
