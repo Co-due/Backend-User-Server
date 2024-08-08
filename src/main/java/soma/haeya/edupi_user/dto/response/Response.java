@@ -1,5 +1,14 @@
 package soma.haeya.edupi_user.dto.response;
 
-public record Response(String message) {
+public class Response {
 
+    private final String message;
+
+    public Response(String message) {
+        this.message = message;
+    }
+
+    public String getMessage() {
+        return message;
+    }
 }
